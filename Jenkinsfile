@@ -42,6 +42,24 @@ pipeline {
                 '''
             }
         }
+
+        stage('E2E') {
+            agent {
+                docker {
+                    image 'mcr.microsoft.com/playwright:v1.48.1-noble'
+                    reuseNode true
+                }
+            }
+
+            steps {
+                echo 'E2E testing jenkins app'
+                sh '''
+                    npm install -g serve
+                    serve -s build
+                    npx playwrite test
+                '''
+            }
+        }
     }
     
     post {
@@ -50,3 +68,8 @@ pipeline {
         }
     }
 }
+
+/*
+npm install -g serve
+serve -s build
+*/
