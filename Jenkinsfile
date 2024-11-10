@@ -56,7 +56,7 @@ pipeline {
                 echo 'E2E testing jenkins app'
                 sh '''
                     npm install serve
-                    node_modules\.bin\serve\serve -s build
+                    node_modules/.bin/serve/serve -s build
                     npx playwrite test
                 '''
             }
