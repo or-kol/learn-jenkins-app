@@ -50,7 +50,6 @@ pipeline {
                     reuseNode true
                     }
                 }
-            }
 
             steps {
                 echo 'E2E testing jenkins app'
@@ -62,7 +61,7 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             junit 'test-results/junit.xml'
