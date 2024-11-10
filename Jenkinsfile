@@ -26,12 +26,6 @@ pipeline {
             }
         }
 
-            '''
-            test if the following exist:
-            build/index.html file
-            npm test
-            a
-            '''
         stage('Test') {
             steps {
                 echo 'Testing jenkins app'
