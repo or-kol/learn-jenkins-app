@@ -48,14 +48,15 @@ pipeline {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.48.1-noble'
                     reuseNode true
+                    }
                 }
             }
 
             steps {
                 echo 'E2E testing jenkins app'
                 sh '''
-                    npm install -g serve
-                    serve -s build
+                    npm install serve
+                    node_modules\.bin\serve\serve -s build
                     npx playwrite test
                 '''
             }
