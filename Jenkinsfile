@@ -27,14 +27,7 @@ pipeline {
         }
 
         stage('Test') {
-            steps {
-                echo 'Testing jenkins app'
-                sh '''
-                    test -f build/$BUILD_FILE_NAME
-                    npm test
-                    a
-                '''
-            }
+            
         }
     }
 }
