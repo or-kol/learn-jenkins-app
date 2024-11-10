@@ -27,7 +27,10 @@ pipeline {
         }
 
         stage('Test') {
-            
+            steps {
+                echo 'Testing jenkins app'
+                
+            }
         }
     }
 }
