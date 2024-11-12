@@ -99,8 +99,8 @@ pipeline {
                     CI_ENVIRONMENT_URL = $(node_modules/.bin/node-jq -r '.deploy_url' deploy-output.json)
                     npx playwright test --reporter=line
                 '''
+                }
             }
-        }
 
         stage('Approval') {
             steps {
@@ -133,7 +133,6 @@ pipeline {
                     npx playwright test --reporter=line
                 '''
             }
-        }
 
             post {
                 always {
@@ -142,5 +141,5 @@ pipeline {
                 }
             }
         }
-    }
+    }    
 }
