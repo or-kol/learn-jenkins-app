@@ -70,7 +70,7 @@ pipeline {
                     post {
                         always {
                             publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', 
-                                reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                                reportName: 'Playwright local Report', reportTitles: '', useWrapperFileDirectly: true])
                         }
                     }
                 }
@@ -95,7 +95,11 @@ pipeline {
             }
         }
 
-        stage('E2E') {
+        stage('Prod E2E') {
+            environment {
+                CI_ENVIRONMENT_URL = 'https://dainty-druid-e88c9c.netlify.app'
+            }
+
             agent {
                 docker {
                     image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
@@ -105,9 +109,6 @@ pipeline {
 
             steps {
                 sh '''
-                    npm install serve
-                    node_modules/.bin/serve -s build &
-                    sleep 10
                     npx playwright test --reporter=line
                 '''
             }
@@ -115,7 +116,7 @@ pipeline {
             post {
                 always {
                     publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', 
-                        reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                        reportName: 'Playwright E2E Report', reportTitles: '', useWrapperFileDirectly: true])
                 }
             }
         }
