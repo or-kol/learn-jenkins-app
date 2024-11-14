@@ -12,15 +12,14 @@ pipeline {
         stage('AWS') {
             agent {
                 docker {
-                    image 'amazon/aws-cli'
+                    image 'amazon/aws-cli:2.15.53'
                     args "--entrypoint=''"
                 }
             }
 
             steps {
                 sh '''
-                    aws --version
-
+                    aws s3 ls
                 '''
             }
         }
